@@ -148,7 +148,7 @@ function Profile() {
         return ;
       }
       setUserListings((prev)=>prev.filter((listing)=> listing._id!==listingId))
-      
+
     }catch(error){
       console.log(error.message);
     }
@@ -225,6 +225,7 @@ function Profile() {
     <button type='button' onClick={handeshowListings} className='text-green-800 w-full'> Show Listings</button>
     {showListingsError && <p className='text-red-700 mt-5'>Error occured</p>}
       
+      {/* show listings */}
 
       {userListings && 
       userListings.length>0  &&
@@ -244,7 +245,9 @@ function Profile() {
         
         <div className='flex flex-col items-center'>
           <button onClick={()=>handelListingDelete(listing._id)} className='text-red-700'>Delete</button>
+          <Link to={`/update-listing/${listing._id}`}>
           <button  className='text-blue-900'>Edit</button>
+          </Link>
         </div>
 
       </div>  

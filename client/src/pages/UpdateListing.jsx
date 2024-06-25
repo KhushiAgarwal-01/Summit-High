@@ -1,13 +1,15 @@
-import React ,{useState} from 'react'
+import React ,{useEffect, useState} from 'react'
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage';
 import {app} from '../firebase';
 import {useSelector} from 'react-redux'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useParams} from 'react-router-dom';
 
 function ListingCreate() {
 
 const {currentUser}=useSelector(state=>state.user)
 const navigate=useNavigate();
+const params=useParams();
+
   const [files,setFiles]=useState([])
   // console.log(files);
   const [formData,setFormData]=useState({
@@ -29,6 +31,25 @@ const navigate=useNavigate();
   const[uploading,setUploading]=useState(false);
   const[error,setError]=useState(false);
   const[loading,setLoading]=useState(false);
+
+
+  useEffect(()=>{
+    const fetchListing=async()=>{
+        const listingId=params.listingId;
+        const res=await fetch(`/api/listing/get/${listingId}`)
+
+        const data=await res.json();
+        if(data.succes===false){
+            console.log('data.message');
+        }
+        setFormData(data);
+
+
+    }
+    fetchListing();
+
+  },[]);
+
 
 // console.log(formData)
 
@@ -120,7 +141,9 @@ const navigate=useNavigate();
      if(+formData.regularPrice< +formData.discountPrice) return setError('Discounted Price should be less than Regular Price')
       setLoading(true),
       setError(false);
-      const res=await fetch('/api/listing/create',{
+
+      //changed the route to update 
+      const res=await fetch(`/api/listing/update/${params.listingId}`,{ 
         method:'POST',
         headers:{
           'Content-Type':'application/json',
@@ -147,7 +170,7 @@ const navigate=useNavigate();
 
   return (
     <main className='p-3 max-w-4xl mx-auto'>
-      <h1 className='text-3xl font-semibold text-center my-7 '>Create A Listing</h1>
+      <h1 className='text-3xl font-semibold text-center my-7 '>Update A Listing</h1>
      <form onSubmit={handelSubmit} className='flex flex-col sm:flex-row gap-4'>
     
     {/* left side div */}
@@ -279,7 +302,7 @@ const navigate=useNavigate();
 
 
     <button disabled={(loading || uploading)} className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opactiy-80'>
-      {loading ?'Creating ..': ' Create Listing'}</button>
+      {loading ?'updating...': ' Updated Listing'}</button>
     {error && <p className='text-red-700 text-sm'>{error}</p>}
  </div>
      </form>
