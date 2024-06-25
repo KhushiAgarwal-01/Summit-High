@@ -23,8 +23,9 @@ const userSchema= new mongoose.Schema(
             default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSheI9UkWllIpSNbs2UdE18KLLswgDON9qzXg&s"
         },
 
-    },{timeStamps:true}
-)
+    },
+    { timestamps: true }
+);
 const User=mongoose.model('User',userSchema);
 
 export default User;

@@ -2,8 +2,9 @@ import React,{useEffect, useRef,useState} from 'react'
 import { useSelector } from 'react-redux'
 import {getDownloadURL, getStorage,ref, uploadBytesResumable} from 'firebase/storage';
 import { app } from '../firebase';
-import { updateUserFailure,updateUserSuccess,updateUserStart } from '../redux/user/userSlice';
+import { updateUserFailure,updateUserSuccess,updateUserStart,deleteUserFailure,deleteUserStart,deleteUserSuccess,signOutUserFailure,signOutUserStart,signOutUserSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
+import {Link} from 'react-router-dom';
 
 function Profile() {
    
@@ -81,6 +82,43 @@ function Profile() {
 
   }
 
+  const handelDeleteUser=async()=>{
+    try{
+      dispatch(deleteUserStart());
+      const res=await fetch(`api/user/delete/${currentUser._id}`,{
+        method:'DELETE',
+
+      })
+      const data=await res.json();
+      if(data.success===false){
+        dispatch(deleteUserFailure(data.message));
+        return ;
+      }
+      dispatch(deleteUserSuccess(data));
+
+
+    }
+    catch(error){
+      dispatch(deleteUserFailure(error.message));
+    }
+  }
+
+  const handelSignOut=async()=>{
+    try{
+      dispatch(signOutUserStart());
+      const res=await fetch('/api/auth/signOut')
+      const data=await res.json();
+      if(data.success===false){
+        dispatch(signOutUserFailure(data.message))
+      }
+      dispatch(signOutUserSuccess(data));
+    }
+    catch(error){
+      dispatch(signOutUserFailure(error.message));
+
+    }
+  }
+
   return (
   <div className='p-3 max-w-lg mx-auto'>
     <h1 className='text-3xl font-semibold text-center my-7'>
@@ -137,11 +175,14 @@ function Profile() {
       uppercase hover:opacity-90'>
         {loading ? 'loading..' : 'Update'}
         </button>
+       <Link to='/create-listing' className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'>
+       Create Listing</Link>
+
     </form>
 
     <div className='flex justify-between mt-5 '>
-      <span className='text-red-7-- cursor-pointer'>Delete Account</span>
-      <span className='text-red-7-- cursor-pointer'>Sign Out</span>
+      <span onClick={handelDeleteUser} className='text-red-7-- cursor-pointer'>Delete Account</span>
+      <span onClick={handelSignOut} className='text-red-7-- cursor-pointer'>Sign Out</span>
 
     </div>
     {error && <p className='text-red-700 mt-5'>{error}</p> }
