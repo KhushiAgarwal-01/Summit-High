@@ -38,7 +38,7 @@ export const updateListing= async(req,res,next)=>{
     const listing = await Listing.findById(req.params.id);
     if(!listing) return (next(errorHandler(401,'Listing not found')));
 
-    if(listing.userRef!=req.user.id){
+    if(req.user.id!=listing.userRef){
         return (next(errorHandler(401,'Oops!, listing owner does not want to update')));
 
     }
@@ -48,7 +48,7 @@ export const updateListing= async(req,res,next)=>{
             req.body,
             {new:true}
         );
-        res.status(200).json('updated listing')
+        res.status(200).json(updatedListing)
     }catch(error){
         next(error);
     }
