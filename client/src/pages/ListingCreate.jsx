@@ -262,8 +262,8 @@ const navigate=useNavigate();
     <span className='font-normal text-gray-600 ml-2'> The first image will be the cover (max 6) </span>
     </p>
     <div className='flex gap-4'>
-    <input onChange={(e)=>setFiles(e.target.files)} className='p-3 border border-gray-300 rounded w-full'  type='file' id='images' accept='image/*' multiple />
-    <button  disabled={uploading} type='button' onClick={handelImageSubmit} className='p-3 text-green-700 border border-gray-700 rounded uppercase hover:shadow-lg disabled:opacity-80 '>
+    <input onChange={(e)=>setFiles(e.target.files)} className='p-3 border border-black rounded w-full'  type='file' id='images' accept='image/*' multiple />
+    <button     disabled={uploading} type='button' onClick={handelImageSubmit} className='p-3  border border-gray-700 rounded uppercase hover:shadow-lg disabled:opacity-80 '>
     {uploading?'uploading...':'Upload'}</button>
     </div>
     {imageUploadError && <p className=' text-red-700 text-sm' >{imageUploadError}</p>}

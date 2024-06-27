@@ -28,12 +28,12 @@ useEffect(() => {
 
 
   return (
-    <header className='bg-slate-200 shadow-md'>
+    <header style={{ backgroundColor: 'rgb(19, 35, 65)' }} className='shadow-md'>
         <div className='flex justify-between items-center max-w-6xl mx-auto p-3'> 
       <Link to='/'>
       <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-        <span className='text-slate-500'>Summit</span>
-        <span className='text-slate-700'>High</span>
+        <span  style={{ color: 'rgb(200,200,200)' }} className=''>Summit</span>
+        <span style={{ color: 'rgb(175 208 255)' }} className=''>High</span>
       </h1>
       </Link>
 
@@ -54,17 +54,17 @@ useEffect(() => {
 
       <ul  className='flex gap-4'>
         <Link to='/'>
-        <li className='hidden sm:inline text-slate-700 hover:underline'>Home</li>
+        <li style={{ color: 'rgb(200,200,200)' }} className='hidden sm:inline hover:underline'>Home</li>
         </Link>
         <Link to='/About'>
-        <li className='hidden sm:inline text-slate-700 hover:underline'>About</li>
+        <li style={{ color: 'rgb(200,200,200)' }} className='hidden sm:inline  hover:underline'>About</li>
         </Link>
         {/* it is directed profile but we have wrapped it in a privateroute in app.jsx so that only signed in user ko profile ka acces ho  */}
         <Link to='/Profile'> 
         {currentUser?( 
           <img className='rounded-full h-7 w-7 object-cover ' src={currentUser.avatar} alt='profile'/>
         ):(
-        <li className=' text-slate-700 hover:underline'>Sign In</li>
+        <li  style={{ color: 'rgb(200,200,200)' }}  className=' hover:underline'>Sign In</li>
         )
          }
          </Link>

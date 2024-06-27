@@ -177,7 +177,7 @@ function Profile() {
         <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
        ):
        filePerc===100 ?(
-        <span className='text-green-700'>Image Successfuly Uploaded</span>
+        <span   className=''>Image Successfuly Uploaded</span>
        ):(
         ''
        )}
@@ -210,19 +210,19 @@ function Profile() {
       uppercase hover:opacity-90'>
         {loading ? 'loading..' : 'Update'}
         </button>
-       <Link to='/create-listing' className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'>
+       <Link to='/create-listing'  style={{ backgroundColor: 'rgb(30,70,110)' }} className=' text-white p-3 rounded-lg uppercase text-center hover:opacity-95'>
        Create Listing</Link>
 
     </form>
 
     <div className='flex justify-between mt-5 '>
-      <span onClick={handelDeleteUser} className='text-red-7-- cursor-pointer'>Delete Account</span>
-      <span onClick={handelSignOut} className='text-red-7-- cursor-pointer'>Sign Out</span>
+      <span onClick={handelDeleteUser} className='text-red-7-- cursor-pointer hover:underline'>Delete Account</span>
+      <span onClick={handelSignOut} className='text-red-7-- cursor-pointer hover:underline'>Sign Out</span>
 
     </div>
     {error && <p className='text-red-700 mt-5'>{error}</p> }
     {updateSuccess && <p className='text-green-800 mt-5'> User Updated Successfully</p>}
-    <button type='button' onClick={handeshowListings} className='text-green-800 w-full'> Show Listings</button>
+    <button type='button' style={{ color: 'rgb(30,70,110)' }} onClick={handeshowListings} className=' w-full hover:underline'> Show Listings</button>
     {showListingsError && <p className='text-red-700 mt-5'>Error occured</p>}
       
       {/* show listings */}
