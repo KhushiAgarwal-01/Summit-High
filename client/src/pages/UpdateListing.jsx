@@ -178,7 +178,7 @@ const params=useParams();
       <div className='flex flex-col gap-4 flex-1'>
 
       <input type="text" placeholder='Name' className='border p-3 rounded-lg border-gray-500'
-      id='name' maxLength='62' minLength='10' required onChange={handelChange} value={formData.name}
+      id='name' maxLength='620' minLength='10' required onChange={handelChange} value={formData.name}
       />
 
        <textarea type="text" placeholder='Description' className='border p-3 rounded-lg border-gray-500'
